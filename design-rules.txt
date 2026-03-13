@@ -1,0 +1,70 @@
+================================================
+  WUOLAH ROMANIA — DESIGN RULES
+================================================
+
+COLORS
+------
+Primary (Deep Blue):    #0A2540   — nav, headers, primary buttons, text
+Accent (Bright Orange): #FF6A00   — CTAs, badges, highlights, active states
+White:                  #FFFFFF   — backgrounds, cards
+Light Gray:             #F5F7FA   — page background, dividers
+Medium Gray:            #94A3B8   — secondary text, placeholders
+Dark Gray:              #4A5568   — body text
+
+TYPOGRAPHY
+----------
+Font Family:  Inter (fallback: system-ui, -apple-system, sans-serif)
+Headings:     font-weight 700 (bold)
+Body:         font-weight 400 (regular)
+Small/Labels: font-weight 500 (medium)
+Scale:        text-sm (14px), text-base (16px), text-lg (18px), text-xl (20px), text-2xl (24px), text-3xl (30px)
+
+BORDER RADIUS
+-------------
+Cards & Containers: rounded-xl  (12px)
+Buttons (primary):  rounded-full (pill shape)
+Buttons (secondary): rounded-xl  (12px)
+Inputs & Selects:   rounded-lg  (8px)
+Avatars:            rounded-full
+
+SPACING & LAYOUT
+----------------
+Philosophy:   Minimalist. Generous whitespace. Card-based content.
+Page padding: px-4 (mobile), px-8 (desktop)
+Card padding: p-6
+Gap between cards: gap-4 (16px)
+Max content width: max-w-5xl centered
+
+SHADOWS
+-------
+Cards:         shadow-sm
+Hover on cards: shadow-md (transition)
+Modals:        shadow-lg
+Dropdowns:     shadow-md
+
+BUTTONS
+-------
+Primary:   bg-[#FF6A00] text-white rounded-full px-6 py-3 font-medium hover:bg-orange-600
+Secondary: bg-white text-[#0A2540] border border-gray-200 rounded-xl px-6 py-3 hover:bg-gray-50
+Danger:    bg-red-500 text-white rounded-full px-6 py-3
+
+INPUTS
+------
+Style: bg-white border border-gray-200 rounded-lg px-4 py-3 focus:ring-2 focus:ring-[#FF6A00] focus:border-transparent
+
+TAILWIND CONFIG TOKENS
+----------------------
+Extend colors:
+  deepBlue:      '#0A2540'
+  accentOrange:  '#FF6A00'
+  lightGray:     '#F5F7FA'
+
+GENERAL PRINCIPLES
+------------------
+1. Mobile-first. Every screen must work on 375px width.
+2. No visual clutter — if an element doesn't serve the user, remove it.
+3. All UI text in Romanian.
+4. Use card-based layouts for document listings.
+5. Consistent 8px spacing grid.
+6. Smooth transitions (transition-all duration-200).
+7. Accessible contrast ratios (WCAG AA minimum).

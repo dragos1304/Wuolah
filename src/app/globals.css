@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-deep-blue: #0A2540;
+  --color-accent-orange: #FF6A00;
+  --color-light-gray: #F5F7FA;
+  --color-medium-gray: #94A3B8;
+  --color-dark-gray: #4A5568;
+  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
+}
+
+body {
+  background: var(--color-light-gray);
+  color: var(--color-deep-blue);
+}
