@@ -1,7 +1,6 @@
 "use server";
 
-import { createClient } from "@/lib/supabase/server";
-import { createServiceClient } from "@/lib/supabase/server";
+import { createClient, createServiceClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
 
 export interface SaveBackpackInput {
@@ -16,7 +15,7 @@ export interface SaveBackpackInput {
 
 export async function saveBackpack(
   data: SaveBackpackInput
-): Promise<{ error: string } | never> {
+): Promise<{ error: string } | { success: true }> {
   // ── Auth check ────────────────────────────────────────────────────────────
   const supabase = await createClient();
   const {
@@ -137,5 +136,5 @@ export async function saveBackpack(
     return { error: "Nu s-a putut salva profilul. Încearcă din nou." };
   }
 
-  redirect("/dashboard");
+  return { success: true };
 }

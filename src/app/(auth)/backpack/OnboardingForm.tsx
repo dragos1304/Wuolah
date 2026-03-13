@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useTransition } from "react";
+import { useRouter } from "next/navigation";
 import {
   UNIVERSITIES_DATA,
   LANGUAGE_LABELS,
@@ -79,6 +80,7 @@ function SelectField({
 }
 
 export default function OnboardingForm() {
+  const router = useRouter();
   const [universitySlug, setUniversitySlug] = useState("");
   const [facultyName, setFacultyName] = useState("");
   const [language, setLanguage] = useState("");
@@ -149,8 +151,10 @@ export default function OnboardingForm() {
         duration_years: specialization.duration_years,
         year: parseInt(year, 10),
       });
-      if (result?.error) {
+      if ("error" in result) {
         setError(result.error);
+      } else {
+        router.push("/dashboard");
       }
     });
   }
