@@ -34,9 +34,29 @@ export interface Database {
         ];
       };
       specializations: {
-        Row: { id: string; faculty_id: string; name: string; created_at: string };
-        Insert: { id?: string; faculty_id: string; name: string; created_at?: string };
-        Update: { id?: string; faculty_id?: string; name?: string };
+        Row: {
+          id: string;
+          faculty_id: string;
+          name: string;
+          study_language: string;
+          duration_years: number;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          faculty_id: string;
+          name: string;
+          study_language?: string;
+          duration_years?: number;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          faculty_id?: string;
+          name?: string;
+          study_language?: string;
+          duration_years?: number;
+        };
         Relationships: [
           {
             foreignKeyName: "specializations_faculty_id_fkey";
@@ -55,6 +75,7 @@ export interface Database {
           faculty_id: string | null;
           specialization_id: string | null;
           year: number | null;
+          study_language: string | null;
           avatar_url: string | null;
           onboarding_complete: boolean;
           created_at: string;
@@ -67,6 +88,7 @@ export interface Database {
           faculty_id?: string | null;
           specialization_id?: string | null;
           year?: number | null;
+          study_language?: string | null;
           avatar_url?: string | null;
           onboarding_complete?: boolean;
           created_at?: string;
@@ -77,6 +99,7 @@ export interface Database {
           faculty_id?: string | null;
           specialization_id?: string | null;
           year?: number | null;
+          study_language?: string | null;
           avatar_url?: string | null;
           onboarding_complete?: boolean;
           updated_at?: string;

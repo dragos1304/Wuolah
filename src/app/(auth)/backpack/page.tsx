@@ -1,6 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { redirect } from "next/navigation";
-import BackpackForm from "./BackpackForm";
+import OnboardingForm from "./OnboardingForm";
 
 export const metadata = {
   title: "Configurează Rucsacul — Wuolah Romania",
@@ -14,11 +14,6 @@ export default async function BackpackPage() {
   } = await supabase.auth.getUser();
 
   if (!user) redirect("/login");
-
-  const { data: universities } = await supabase
-    .from("universities")
-    .select("id, name, city")
-    .order("name");
 
   return (
     <div className="min-h-screen bg-light-gray flex flex-col items-center justify-center px-4 py-12">
@@ -35,7 +30,13 @@ export default async function BackpackPage() {
               strokeLinecap="round"
               strokeLinejoin="round"
               strokeWidth={2}
-              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+              d="M12 14l9-5-9-5-9 5 9 5z"
+            />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M12 14l6.16-3.422A12.083 12.083 0 0121 12c0 6.075-4.925 11-11 11S1 18.075 1 12c0-.585.048-1.16.14-1.72L12 14z"
             />
           </svg>
         </div>
@@ -50,8 +51,8 @@ export default async function BackpackPage() {
       </div>
 
       {/* Form card */}
-      <div className="w-full max-w-lg">
-        <BackpackForm universities={universities ?? []} />
+      <div className="w-full max-w-lg bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
+        <OnboardingForm />
       </div>
 
       <p className="mt-6 text-xs text-medium-gray text-center max-w-xs">
