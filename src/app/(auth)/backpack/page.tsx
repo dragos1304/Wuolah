@@ -15,6 +15,16 @@ export default async function BackpackPage() {
 
   if (!user) redirect("/login");
 
+  // Server-side guard: if the user already completed onboarding (e.g. they
+  // navigated here from a cached client route), send them straight to /dashboard.
+  const { data: profile } = await supabase
+    .from("user_profiles")
+    .select("onboarding_complete")
+    .eq("id", user.id)
+    .single();
+
+  if (profile?.onboarding_complete) redirect("/dashboard");
+
   return (
     <div className="min-h-screen bg-light-gray flex flex-col items-center justify-center px-4 py-12">
       {/* Header */}

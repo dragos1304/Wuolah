@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { useRouter } from "next/navigation";
 import {
   UNIVERSITIES_DATA,
   LANGUAGE_LABELS,
@@ -80,7 +79,6 @@ function SelectField({
 }
 
 export default function OnboardingForm() {
-  const router = useRouter();
   const [universitySlug, setUniversitySlug] = useState("");
   const [facultyName, setFacultyName] = useState("");
   const [language, setLanguage] = useState("");
@@ -154,12 +152,10 @@ export default function OnboardingForm() {
       if ("error" in result) {
         setError(result.error);
       } else {
-        // Invalidate the router cache so the middleware re-evaluates
-        // onboarding_complete = true before navigating. Without this,
-        // Next.js uses the cached /dashboard → /backpack redirect rule
-        // and immediately sends the user back here.
-        router.refresh();
-        router.push("/dashboard");
+        // Hard navigation: bypasses the Next.js client-side router cache
+        // entirely so the middleware re-evaluates onboarding_complete = true
+        // on a fresh request, rather than replaying the cached redirect.
+        window.location.href = "/dashboard";
       }
     });
   }
