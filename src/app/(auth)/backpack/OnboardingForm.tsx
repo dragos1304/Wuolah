@@ -140,22 +140,25 @@ export default function OnboardingForm() {
     setError(null);
 
     startTransition(async () => {
-      const result = await saveBackpack({
-        university_name: university.university,
-        university_location: university.location,
-        faculty_name: facultyName,
-        study_language: language,
-        specialization_name: specializationName,
-        duration_years: specialization.duration_years,
-        year: parseInt(year, 10),
-      });
-      if ("error" in result) {
-        setError(result.error);
-      } else {
-        // Hard navigation: bypasses the Next.js client-side router cache
-        // entirely so the middleware re-evaluates onboarding_complete = true
-        // on a fresh request, rather than replaying the cached redirect.
-        window.location.href = "/dashboard";
+      try {
+        const result = await saveBackpack({
+          university_name: university.university,
+          university_location: university.location,
+          faculty_name: facultyName,
+          study_language: language,
+          specialization_name: specializationName,
+          duration_years: specialization.duration_years,
+          year: parseInt(year, 10),
+        });
+        if ("error" in result) {
+          setError(result.error);
+        } else {
+          // Hard navigation bypasses the Next.js client-side router cache so
+          // the middleware re-evaluates onboarding_complete on a fresh request.
+          window.location.href = "/dashboard";
+        }
+      } catch {
+        setError("A apărut o eroare neașteptată. Te rugăm să încerci din nou.");
       }
     });
   }

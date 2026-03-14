@@ -119,17 +119,24 @@ export async function saveBackpack(
   const specialization_id = specData.id;
 
   // ── Persist to user profile ───────────────────────────────────────────────
+  // Use upsert (not update) so the row is created if the trigger somehow
+  // failed to fire at signup — a silent UPDATE on a missing row returns no
+  // error but also writes nothing, which is the root cause of the stuck-on-
+  // backpack bug.
   const { error: profileError } = await supabase
     .from("user_profiles")
-    .update({
-      university_id,
-      faculty_id,
-      specialization_id,
-      year,
-      study_language,
-      onboarding_complete: true,
-    })
-    .eq("id", user.id);
+    .upsert(
+      {
+        id: user.id,
+        university_id,
+        faculty_id,
+        specialization_id,
+        year,
+        study_language,
+        onboarding_complete: true,
+      },
+      { onConflict: "id" }
+    );
 
   if (profileError) {
     console.error("update user_profiles", profileError);
