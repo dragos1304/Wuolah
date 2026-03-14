@@ -62,8 +62,8 @@ function SelectField({
             disabled
               ? "cursor-not-allowed border-gray-100 text-gray-300"
               : value
-              ? "border-[#FF6A00] text-[#0A2540]"
-              : "border-gray-200 text-gray-500 hover:border-gray-300 focus:border-[#FF6A00]",
+                ? "border-[#FF6A00] text-[#0A2540]"
+                : "border-gray-200 text-gray-500 hover:border-gray-300 focus:border-[#FF6A00]",
           ].join(" ")}
         >
           <option value="" disabled>
@@ -154,6 +154,11 @@ export default function OnboardingForm() {
       if ("error" in result) {
         setError(result.error);
       } else {
+        // Invalidate the router cache so the middleware re-evaluates
+        // onboarding_complete = true before navigating. Without this,
+        // Next.js uses the cached /dashboard → /backpack redirect rule
+        // and immediately sends the user back here.
+        router.refresh();
         router.push("/dashboard");
       }
     });
